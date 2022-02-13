@@ -1,6 +1,6 @@
 import './App.css';
 import ProductList from './components/ProductList.js';
-import Category from './components/Category.js';
+import Categories from './components/Categories.js';
 import { useState } from 'react';
 import { allProducts } from './fake-data/all-products.js';
 
@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <h1>Products</h1>
-      <Category
+      <Categories
         handleCategories={handleCategories}
         selectedCategory={selectedCategory}
       />

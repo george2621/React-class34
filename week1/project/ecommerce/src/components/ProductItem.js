@@ -5,6 +5,5 @@ const ProductItem = ({ productName, productImage }) => (
         <img src={productImage} alt={productName} />
         <p>{productName}</p>
     </div>
-
 )
 export default ProductItem;
