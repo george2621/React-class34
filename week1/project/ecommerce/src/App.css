@@ -3,6 +3,7 @@
   text-align: center;
   width: 100%;
 }
+
 .product img {
   width: 300px;
   height: 300px;
@@ -37,9 +38,11 @@
 }
 
 @media (min-width: 1040px) {
+  
   .product {
     width: calc((100% / 3) - 15px);
   }
+
   .category {
     width: 200px;
   }
