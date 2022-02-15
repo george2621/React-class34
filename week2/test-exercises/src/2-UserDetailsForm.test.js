@@ -24,18 +24,36 @@ const changedUser = {
 
 describe("UserDetailsForm", () => {
   it("Correctly fills in the initial values", () => {
-    // TODO: Fill in!
-    expect(true).toBe(false);
+    render(<UserDetailsForm initialUserValues={testUser} />)
+    const firstNameElement = screen.getByLabelText('First name:').getAttribute('value');
+    const lastNameElement = screen.getByLabelText('Last name:').getAttribute('value');
+    const roleElement = screen.getByLabelText('Role:').getAttribute('value');
+    expect(firstNameElement).toBe(testUser.firstName);
+    expect(lastNameElement).toBe(testUser.lastName);
+    expect(roleElement).toBe(testUser.role);
   });
 
   it("Correctly changes a fields value", () => {
-    // TODO: Fill in!
-    expect(true).toBe(false);
+    render(<UserDetailsForm initialUserValues={changedUser} />)
+    const firstNameElement = screen.getByLabelText('First name:');
+    const lastNameElement = screen.getByLabelText('Last name:');
+    const roleElement = screen.getByLabelText('Role:');
+    fireEvent.change(firstNameElement, { target: { value: changedUser.firstName } });
+    fireEvent.change(lastNameElement, { target: { value: changedUser.lastName } });
+    fireEvent.change(roleElement, { target: { value: changedUser.role } });
+    expect(firstNameElement.value).toBe(changedUser.firstName)
+    expect(lastNameElement.value).toBe(changedUser.lastName)
+    expect(roleElement.value).toBe(changedUser.role)
   });
 
   it("Submits the right values to the onSubmit function", () => {
-    // TODO: Fill in!
-    // TIP: You will need to mock the onSubmit function prop so you can check that it was called and what it was called with! Have a look at `jest.fn`
-    expect(true).toBe(false);
+    const onSubmitFunction = jest.fn(() => { });
+    render(<UserDetailsForm initialUserValues={testUser} onSubmit={onSubmitFunction} />)
+    const submitElement = screen.getByTestId('submit-button');
+    const firstNameElement = screen.getByLabelText('First name:').getAttribute('value');
+    const lastNameElement = screen.getByLabelText('Last name:').getAttribute('value');
+    const roleElement = screen.getByLabelText('Role:').getAttribute('value');
+    fireEvent.click(submitElement);
+    expect(onSubmitFunction).toHaveBeenCalledWith({ firstName: firstNameElement, lastName: lastNameElement, role: roleElement });
   });
 });
