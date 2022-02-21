@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RandomJoke from "./3-ChuckNorrisJoke";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+import fetchMock from "jest-fetch-mock";
+
 /**
  * ChuckNorrisJoke is a component that fetches a joke from an api and displays it on the screen.
  * It is a simple component that we can use to practice API testing! Let's look at how the user sees the component:
@@ -24,39 +24,33 @@ const testSuccessfulResponse = JSON.stringify({
   },
 });
 
-const server = setupServer(
-  rest.get("http://api.icndb.com/jokes/random", (req, res, ctx) => {
-    return res(ctx.json({ testSuccessfulResponse }));
-  })
-);
+beforeEach(() => fetchMock.resetMocks());
+beforeAll(() => (console.error = jest.fn()));
 
-// set the server when is bad status code
-server.use(
-  rest.get("http://api.icndb.com/jokes/random", (req, res, ctx) => {
-    return res(ctx.status(500));
-  }))
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+const testUnhappyResponse = JSON.stringify({});
 
 describe("ChuckNorrisJoke", () => {
 
   it("should show the Loading text when the component is still loading", async () => {
+    fetch.mockResponse(testSuccessfulResponse);
     render(<RandomJoke />);
     const heading = screen.getByText("Loading...");
     expect(heading).toBeInTheDocument();
   });
 
   it("should show the joke the fetch returns", async () => {
+    fetch.mockResponseOnce(testSuccessfulResponse);
     render(<RandomJoke />);
     const jokeElement = await screen.findByText(joke)
     expect(jokeElement).toBeInTheDocument();
   });
 
   it("should show an error message if the fetch fails", async () => {
+    fetch.mockResponseOnce(testUnhappyResponse);
     render(<RandomJoke />);
-    const errorElement = await screen.findByText('Something went wrong with grabbing your joke. Please try again later.')
-    expect(errorElement).toBeInTheDocument();
+    const errorEle = await screen.findByText(
+      /Something went wrong with grabbing your joke. Please try again later./i
+    );
+    expect(errorEle).toBeInTheDocument();
   });
 });

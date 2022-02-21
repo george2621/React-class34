@@ -48,7 +48,6 @@ function UserDetailsForm({ initialUserValues, onSubmit }) {
         onClick={() => {
           onSubmit({ firstName, lastName, role });
         }}
-        data-testid="submit-button"
       >
         Submit
       </button>

@@ -31,9 +31,10 @@ function RandomJoke() {
       .then((response) => response.json())
       .then((result) => {
         setJoke(result.value.joke);
+        console.log(` type of ${typeof (joke)}`);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err.message);
         setError(true);
       })
       .finally(() => {

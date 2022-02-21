@@ -49,7 +49,7 @@ describe("UserDetailsForm", () => {
   it("Submits the right values to the onSubmit function", () => {
     const onSubmitFunction = jest.fn(() => { });
     render(<UserDetailsForm initialUserValues={testUser} onSubmit={onSubmitFunction} />)
-    const submitElement = screen.getByTestId('submit-button');
+    const submitElement = screen.getByRole('button', { name: /Submit/i });
     const firstNameElement = screen.getByLabelText('First name:').getAttribute('value');
     const lastNameElement = screen.getByLabelText('Last name:').getAttribute('value');
     const roleElement = screen.getByLabelText('Role:').getAttribute('value');
