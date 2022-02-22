@@ -53,11 +53,47 @@ function TestComponent({ userToLogin }) {
 }
 
 describe("LoggedInUserContext", () => {
-  it("Correctly sets the user as loggedIn if an initialUser is given", () => {});
+  it("Correctly sets the user as loggedIn if an initialUser is given", () => {
+    render(
+      <LoggedInUserContextProvider initialUser={"George"}>
+        <TestComponent />
+      </LoggedInUserContextProvider>,
+    );
+    const checkElement = screen.getByTestId(TEST_ID.IS_LOGGED_IN);
+    expect(checkElement).toHaveAttribute("data-value", "true");
+  });
 
-  it("Correctly sets the user as logged out if no initialUser is given", () => {});
+  it("Correctly sets the user as logged out if no initialUser is given", () => {
+    render(
+      <LoggedInUserContextProvider>
+        <TestComponent />
+      </LoggedInUserContextProvider>,
+    );
+    const checkElement = screen.getByTestId(TEST_ID.IS_LOGGED_IN);
+    expect(checkElement).toHaveAttribute("data-value", "false");
+  });
 
-  it("logs the user in if you use the login function", () => {});
+  it("logs the user in if you use the login function", () => {
+    render(
+      <LoggedInUserContextProvider>
+        <TestComponent userToLogin="George" />
+      </LoggedInUserContextProvider>,
+    );
+    const logInButton = screen.getByTestId(TEST_ID.LOGIN);
+    fireEvent.click(logInButton);
+    const checkElement = screen.getByTestId(TEST_ID.IS_LOGGED_IN);
+    expect(checkElement).toHaveAttribute("data-value", "true");
+  });
 
-  it("logs the user out if you use the logout function", () => {});
+  it("logs the user out if you use the logout function", () => {
+    render(
+      <LoggedInUserContextProvider>
+        <TestComponent userToLogin="George" />
+      </LoggedInUserContextProvider>,
+    );
+    const logOutButton = screen.getByTestId(TEST_ID.LOGOUT);
+    fireEvent.click(logOutButton);
+    const checkElement = screen.getByTestId(TEST_ID.IS_LOGGED_IN);
+    expect(checkElement).toHaveAttribute("data-value", "false");
+  });
 });
