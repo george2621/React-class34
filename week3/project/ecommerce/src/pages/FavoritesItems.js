@@ -32,27 +32,31 @@ const FavoritesItems = () => {
 
   if (isLoading) {
     return <h1>Loading...</h1>;
-  } else if (!isLoading && !error && favoriteList.length === 0) {
-    return <h1>There are no products in favorite</h1>;
-  } else if (error) {
-    return <h1>Faild to fetch data</h1>;
-  } else {
-    return (
-      <>
-        <Nav product={"Favorites"} />
-        <div className="all-products">
-          {favoriteList.map((product, index) => (
-            <ProductItem
-              key={index}
-              id={product.id}
-              productName={product.title}
-              productImage={product.image}
-            />
-          ))}
-        </div>
-      </>
-    );
   }
+
+  if (!isLoading && !error && favoriteList.length === 0) {
+    return <h1>There are no products in favorite</h1>;
+  }
+
+  if (error) {
+    return <h1>Faild to fetch data</h1>;
+  }
+
+  return (
+    <>
+      <Nav product={"Favorites"} />
+      <div className="all-products">
+        {favoriteList.map((product, index) => (
+          <ProductItem
+            key={index}
+            id={product.id}
+            productName={product.title}
+            productImage={product.image}
+          />
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default FavoritesItems;

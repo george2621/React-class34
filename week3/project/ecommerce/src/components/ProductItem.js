@@ -7,7 +7,6 @@ import { useContext } from "react";
 
 const ProductItem = ({ productName, productImage, id }) => {
   const { isFavorite, toggleFavorite } = useContext(FavoriteContext);
-  let isFav = isFavorite(id);
 
   return (
     <div className="product">
@@ -20,7 +19,7 @@ const ProductItem = ({ productName, productImage, id }) => {
         >
           <img
             className="favorite-icon"
-            src={isFav ? heartSolid : heartRegular}
+            src={isFavorite(id) ? heartSolid : heartRegular}
             alt="favorite item"
           />
         </div>

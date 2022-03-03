@@ -43,8 +43,12 @@ describe("MyProfile", () => {
     render(
       <TestComponent loggedInUser={{ name: "George" }} isLoggedIn={true} />,
     );
-    const logOutButton = screen.getByRole("button", { name: /Log out/i });
-    expect(logOutButton).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId(TEST_ID.MYPROFILE_LOGOUT_BUTTON));
+    expect(screen.queryByText("Welcome back George!")).not.toBeInTheDocument();
+    expect(
+      screen.getByText("You are not logged in! Please login first."),
+    ).toBeInTheDocument();
   });
 
   it("Shows a message to login if the user is not logged in", () => {

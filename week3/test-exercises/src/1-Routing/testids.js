@@ -11,4 +11,6 @@ export default {
   HOME_CONTAINER: "home-container",
   USER_LIST_CONTAINER: "user-list-container",
   USER_DETAILS_CONTAINER: "user-details-container",
+  MYPROFILE_LOGOUT_BUTTON: "logout-button",
+  MYPROFILE_LOGGED_OUT_MESSAGE: "logout-message",
 };

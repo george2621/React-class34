@@ -15,7 +15,6 @@ export function FavoriteContextProvider({ children }) {
       setFavorites([...newFavorites, id]);
     } else {
       setFavorites(newFavorites);
-      console.log(favorites);
     }
   };
 

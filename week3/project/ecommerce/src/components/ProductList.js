@@ -12,21 +12,24 @@ const ProductList = ({ selectedCategory }) => {
 
   if (loading) {
     return <h2>loading...</h2>;
-  } else if (error) {
+  }
+
+  if (error) {
     return <h2>{error}</h2>;
-  } else
-    return (
-      <div className="all-products">
-        {data.map((product) => (
-          <ProductItem
-            key={product.id}
-            id={product.id}
-            productName={product.title}
-            productImage={product.image}
-          />
-        ))}
-      </div>
-    );
+  }
+
+  return (
+    <div className="all-products">
+      {data.map((product) => (
+        <ProductItem
+          key={product.id}
+          id={product.id}
+          productName={product.title}
+          productImage={product.image}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default ProductList;

@@ -8,20 +8,23 @@ const Categories = ({ handleCategories, selectedCategory }) => {
 
   if (loading) {
     return <h2>loading...</h2>;
-  } else if (error) {
+  }
+
+  if (error) {
     return <h2>{error}</h2>;
-  } else
-    return data.map((category, index) => (
-      <button
-        key={index}
-        className={`category ${
-          selectedCategory === category ? "selected-category" : ""
-        }`}
-        onClick={() => handleCategories(category)}
-      >
-        {category}
-      </button>
-    ));
+  }
+
+  return data.map((category, index) => (
+    <button
+      key={index}
+      className={`category ${
+        selectedCategory === category ? "selected-category" : ""
+      }`}
+      onClick={() => handleCategories(category)}
+    >
+      {category}
+    </button>
+  ));
 };
 
 export default Categories;

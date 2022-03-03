@@ -19,7 +19,7 @@ nav {
   margin-bottom: 10px;
 }
 
-.product img {
+.product-image {
   width: 300px;
   height: 300px;
   margin-bottom: 40px;
@@ -81,8 +81,8 @@ nav {
   position: absolute;
   right: 0;
   top: 20px;
-  width: 20px !important;
-  height: 20px !important;
+  width: 20px;
+  height: 20px;
 }
 
 .product-details {
