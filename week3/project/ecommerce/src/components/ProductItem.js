@@ -20,7 +20,7 @@ const ProductItem = ({ productName, productImage, id }) => {
           <img
             className="favorite-icon"
             src={isFavorite(id) ? heartSolid : heartRegular}
-            alt="favorite item"
+            alt={productName}
           />
         </div>
         <img className="product-image" src={productImage} alt={productName} />

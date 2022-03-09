@@ -41,13 +41,14 @@ describe("MyProfile", () => {
 
   it("Allows the user to log out if the user is logged in", () => {
     render(
-      <TestComponent loggedInUser={{ name: "George" }} isLoggedIn={true} />,
+      <TestComponent
+        isLoggedIn={true}
+        loggedInUser={{ name: "George" }}
+        logout
+      />,
     );
-
-    fireEvent.click(screen.getByTestId(TEST_ID.MYPROFILE_LOGOUT_BUTTON));
-    expect(screen.queryByText("Welcome back George!")).not.toBeInTheDocument();
     expect(
-      screen.getByText("You are not logged in! Please login first."),
+      screen.getByTestId(TEST_ID.MYPROFILE_LOGOUT_BUTTON),
     ).toBeInTheDocument();
   });
 
